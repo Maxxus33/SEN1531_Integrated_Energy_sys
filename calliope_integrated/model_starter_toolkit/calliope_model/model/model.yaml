@@ -14,14 +14,18 @@ config:
     extra_math: ["operate"]
 #    datetime_format: "%Y-%m-%d %H:%M:%S+00:00"
     mode: base # You can choose either "base", or "operate"
+ 
+
 
   build:
     ensure_feasibility: false # Switches on/off the "unmet demand" constraint
 
   solve:
     solver: gurobi
+    solver_io: python
     zero_threshold: 1e-10 # Any value coming out of the backend that is smaller than this (due to floating point errors, probably) will be set to zero
     shadow_prices: ["system_balance"] # Asks the solver to return also the shadow prices for a selected constraint (e.g., "system_balance") as part of the solution. See: https://calliope.readthedocs.io/en/latest/advanced/shadow_prices/
+   
 
     solver_options: 
         Threads: 6
@@ -47,11 +51,11 @@ data_tables:
     add_dims:
       parameters: sink_use_equals
   renewables:
-    data: input_data_tables/renewables.csv
+    data: input_data_tables/renewables1.csv
     rows: timesteps
     columns: [nodes,techs]
     select:
-      techs: [solar_pv,wind_offshore,wind_onshore]    
+      techs: [wind_offshore]    
     add_dims:
       parameters: source_use_equals  
 

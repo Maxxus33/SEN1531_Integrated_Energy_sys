@@ -26,83 +26,10 @@ techs:
       index: monetary
       dims: costs
 
-  # ccgt:
-  #   name: "Combined cycle gas turbine"
-  #   color: "#E37A72"
-  #   base_tech: supply
-  #   template: interest_rate_setter
-  #   carrier_out: power
-  #   flow_out_eff: 0.57
-  #   flow_ramping: 0.8
-  #   lifetime: 25
-  #   cost_flow_cap:
-  #     data: 904.7795  # kEUR per MW
-  #     index: monetary
-  #     dims: costs
-  #   cost_flow_in:
-  #     data: 0.00455 # kEUR per MWh
-  #     index: monetary
-  #     dims: costs
-
-  # nuclear:
-  #   name: "Nuclear power plant"
-  #   color: "#F3007A"
-  #   base_tech: supply
-  #   template: interest_rate_setter
-  #   carrier_out: power
-  #   flow_out_eff: 0.4
-  #   flow_ramping: 0.5 # assumption: less flexible than CCGT
-  #   lifetime: 50
-  #   cost_flow_cap:
-  #     data: 3672  # kEUR per MW
-  #     index: monetary
-  #     dims: costs
-  #   cost_flow_out:
-  #     data: 0.00175 # kEUR per MWh
-  #     index: monetary
-  #     dims: costs
-  #   cost_flow_in:
-  #     data: 0.00825 # kEUR per MWh
-  #     index: monetary
-  #     dims: costs
-
   # ##
   # # Variable renewable supply
   # ##
 
-  # solar_pv:
-  #   name: "Solar photovoltaic power"
-  #   color: "#F9D956"
-  #   base_tech: supply
-  #   template: interest_rate_setter
-  #   carrier_out: power
-  #   source_unit: per_cap
-  #   lifetime: 37 
-  #   cost_flow_cap:
-  #     data: 676.5703  # kEUR per MWW
-  #     index: monetary
-  #     dims: costs
-  #   cost_flow_in:
-  #     data:  0.0000106 # kEUR per MWh
-  #     index: monetary
-  #     dims: costs
-
-  # wind_onshore:
-  #   name: "Wind power onshore"
-  #   color: "#56F9C0"
-  #   base_tech: supply
-  #   template: interest_rate_setter
-  #   carrier_out: power
-  #   source_unit: per_cap
-  #   lifetime: 30 
-  #   cost_flow_cap:
-  #     data: 1769.1171 # kEUR per MW
-  #     index: monetary
-  #     dims: costs
-  #   cost_flow_out:
-  #     data: 0.001508 # kEUR per MW
-  #     index: monetary
-  #     dims: costs
 
 
   wind_offshore:
@@ -118,6 +45,96 @@ techs:
       index: monetary
       dims: costs
 
+  battery_storage:
+      name: "Lithium-ion battery storage"
+      color: "#FF6B6B"
+      base_tech: storage
+      template: interest_rate_setter
+      carrier_in: power
+      carrier_out: power
+      cyclic_storage: false  # operate-mode requires non-cyclic storage
+      storage_initial: 0 # start empty at first timestep to avoid NaN in storage balance
+      storage_cap_per_unit: 4.1 # MWh per MW of capacity (4-hour battery)
+      flow_out_eff: 0.975 # Round-trip efficiency (discharge)
+      flow_in_eff: 0.985 # (charge)
+      lifetime: 25 # Battery lifetime in years
+      cost_flow_cap:
+        data: 70  # kEUR per MW (power capacity)
+        index: monetary
+        dims: costs
+      cost_storage_cap:
+        data: 60   # kEUR per MWh (energy capacity)
+        index: monetary
+        dims: costs
+      cost_flow_in:
+        data: 0.000001 # kEUR per MWh (negligible variable cost)
+        index: monetary
+        dims: costs
+      cost_flow_out:
+        data: 0.000001 # kEUR per MWh (negligible variable cost)
+        index: monetary
+        dims: costs
+
+  ##
+  # Hydrogen chain
+  ##
+
+  electrolyser:
+    name: "Electrolyser"
+    color: "#2BC0E4"
+    base_tech: conversion
+    template: interest_rate_setter
+    carrier_in: power
+    carrier_out: hydrogen
+    flow_out_eff: 0.70
+    lifetime: 20
+    cost_flow_cap:
+      data: 750 # kEUR per MW
+      index: monetary
+      dims: costs
+    cost_flow_in:
+      data: 0.000001 # kEUR per MWh
+      index: monetary
+      dims: costs
+
+  hydrogen_storage:
+    name: "Hydrogen storage"
+    color: "#6AC47E"
+    base_tech: storage
+    template: interest_rate_setter
+    carrier_in: hydrogen
+    carrier_out: hydrogen
+    cyclic_storage: false
+    storage_initial: 0 # start empty at first timestep to avoid NaN in storage balance
+    flow_in_eff: 0.995
+    flow_out_eff: 0.995
+    lifetime: 30
+    cost_flow_cap:
+      data: 35 # kEUR per MW
+      index: monetary
+      dims: costs
+    cost_storage_cap:
+      data: 2 # kEUR per MWh
+      index: monetary
+      dims: costs
+
+  fuel_cell:
+    name: "Fuel cell"
+    color: "#1E88E5"
+    base_tech: conversion
+    template: interest_rate_setter
+    carrier_in: hydrogen
+    carrier_out: power
+    flow_out_eff: 0.55
+    lifetime: 20
+    cost_flow_cap:
+      data: 900 # kEUR per MW
+      index: monetary
+      dims: costs
+    cost_flow_in:
+      data: 0.000001 # kEUR per MWh
+      index: monetary
+      dims: costs
 
   ##
   # Demand
@@ -128,6 +145,13 @@ techs:
     color: "#072486"
     base_tech: demand
     carrier_in: power
+
+  demand_big_user:
+    name: "Flexible large electricity user"
+    color: "#F4A261"
+    base_tech: demand
+    carrier_in: power
+    sink_use_max: 0 # disabled by default; activated in scenario overrides
 
   curtailment:
     name: "Power curtailment"
