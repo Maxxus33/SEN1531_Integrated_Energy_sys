@@ -158,5 +158,9 @@ techs:
     color: "#000000"
     base_tech: demand
     carrier_in: power
-    sink_use_max: 20000 # higher than peak demand
+    sink_use_max: 2000000 # higher than peak demand
+    cost_flow_in:
+      data: 0.001 # kEUR per MWh penalty on spilled power
+      index: monetary
+      dims: costs
 

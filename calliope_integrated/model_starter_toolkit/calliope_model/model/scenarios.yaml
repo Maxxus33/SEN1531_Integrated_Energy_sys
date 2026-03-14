@@ -4,7 +4,7 @@
 scenarios:
   # more_renewables: ["higher_wind","higher_solar"]
   # generation_outage: ["lower_ccgt"]
-  baseline: []
+  baseline: ["neutral_baseline"]
   surplus_to_battery: ["enable_battery_pathway"]
   surplus_to_hydrogen: ["enable_hydrogen_pathway"]
   surplus_to_big_user: ["enable_big_user_pathway"]
@@ -14,6 +14,22 @@ scenarios:
 ##
 overrides:
 
+  neutral_baseline:
+    nodes:
+      NLD:
+        techs:
+          battery_storage:
+            flow_cap: 0
+            storage_cap: 0
+          electrolyser:
+            flow_cap: 0
+          hydrogen_storage:
+            flow_cap: 0
+            storage_cap: 0
+          fuel_cell:
+            flow_cap: 0
+          demand_big_user:
+            sink_use_max: 0
 
   enable_battery_pathway:
     nodes:

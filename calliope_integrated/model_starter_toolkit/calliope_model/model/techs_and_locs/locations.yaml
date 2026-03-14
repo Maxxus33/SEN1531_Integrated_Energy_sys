@@ -24,16 +24,16 @@ nodes:
       # ##
 
       wind_offshore:
-        flow_cap: 3978 # MW, corrected based on CBS data
+        flow_cap: 70000 # MW, corrected based on CBS data
 
       battery_storage:
         flow_cap: 0 # enabled in scenario overrides
         storage_cap: 0 # required with operate-style fixed-capacity formulation
       electrolyser:
-        flow_cap: 1000 # MW
+        flow_cap: 0 # enabled in scenario overrides
       hydrogen_storage:
-        flow_cap: 500 # MW
-        storage_cap: 5000 # MWh_h2
+        flow_cap: 0 # enabled in scenario overrides
+        storage_cap: 0 # enabled in scenario overrides
       fuel_cell:
-        flow_cap: 500 # MW
+        flow_cap: 0 # enabled in scenario overrides
 

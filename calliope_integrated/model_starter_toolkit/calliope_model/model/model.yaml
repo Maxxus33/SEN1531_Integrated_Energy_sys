@@ -57,5 +57,6 @@ data_tables:
     select:
       techs: [wind_offshore]    
     add_dims:
-      parameters: source_use_equals  
+      parameters: source_use_equals
+      
 
