@@ -26,8 +26,6 @@ overrides:
           hydrogen_storage:
             flow_cap: 0
             storage_cap: 0
-          fuel_cell:
-            flow_cap: 0
           demand_big_user:
             sink_use_max: 0
 
@@ -43,8 +41,6 @@ overrides:
           hydrogen_storage:
             flow_cap: 0
             storage_cap: 0
-          fuel_cell:
-            flow_cap: 0
           demand_big_user:
             sink_use_max: 0
 
@@ -59,8 +55,6 @@ overrides:
           hydrogen_storage:
             flow_cap: 500 # MW
             storage_cap: 5000 # MWh_h2
-          fuel_cell:
-            flow_cap: 500 # MW
           demand_big_user:
             sink_use_max: 0
 
@@ -81,7 +75,5 @@ overrides:
           hydrogen_storage:
             flow_cap: 0
             storage_cap: 0
-          fuel_cell:
-            flow_cap: 0
           demand_big_user:
             sink_use_max: 2500 # MW flexible demand ceiling
