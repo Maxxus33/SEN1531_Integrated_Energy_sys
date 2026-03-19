@@ -97,27 +97,6 @@ techs:
       index: monetary
       dims: costs
 
-  hydrogen_storage:
-    name: "Hydrogen storage"
-    color: "#6AC47E"
-    base_tech: storage
-    template: interest_rate_setter
-    carrier_in: hydrogen
-    carrier_out: hydrogen
-    cyclic_storage: false
-    storage_initial: 0 # start empty at first timestep to avoid NaN in storage balance
-    flow_in_eff: 0.995
-    flow_out_eff: 0.995
-    lifetime: 30
-    cost_flow_cap:
-      data: 35 # kEUR per MW
-      index: monetary
-      dims: costs
-    cost_storage_cap:
-      data: 2 # kEUR per MWh
-      index: monetary
-      dims: costs
-
   # fuel_cell:
   #   name: "Fuel cell"
   #   color: "#1E88E5"
@@ -152,6 +131,13 @@ techs:
     base_tech: demand
     carrier_in: power
     sink_use_max: 0 # disabled by default; activated in scenario overrides
+
+  demand_h2_offtake:
+    name: "Hydrogen offtake demand"
+    color: "#2A9D8F"
+    base_tech: demand
+    carrier_in: hydrogen
+    sink_use_max: 0 # disabled by default; activated in hydrogen scenario
 
   curtailment:
     name: "Power curtailment"

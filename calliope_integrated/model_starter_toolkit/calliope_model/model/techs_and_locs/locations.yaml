@@ -31,9 +31,6 @@ nodes:
         storage_cap: 0 # required with operate-style fixed-capacity formulation
       electrolyser:
         flow_cap: 0 # enabled in scenario overrides
-      hydrogen_storage:
-        flow_cap: 0 # enabled in scenario overrides
-        storage_cap: 0 # enabled in scenario overrides
       # fuel_cell:
       #   flow_cap: 0 # enabled in scenario overrides
 

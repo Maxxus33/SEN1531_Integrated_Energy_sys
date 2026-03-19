@@ -9,6 +9,14 @@ scenarios:
   surplus_to_hydrogen: ["enable_hydrogen_pathway"]
   surplus_to_big_user: ["enable_big_user_pathway"]
   surplus_to_big_user_two_nodes: ["enable_big_user_two_nodes_pathway"]
+  ua_baseline_avg: ["neutral_baseline", "wind_cf_avg_real"]
+  ua_baseline_rndm: ["neutral_baseline", "wind_cf_rndm"]
+  ua_battery_avg: ["enable_battery_pathway", "wind_cf_avg_real"]
+  ua_battery_rndm: ["enable_battery_pathway", "wind_cf_rndm"]
+  ua_hydrogen_avg: ["enable_hydrogen_pathway", "wind_cf_avg_real"]
+  ua_hydrogen_rndm: ["enable_hydrogen_pathway", "wind_cf_rndm"]
+  ua_big_user_2n_avg: ["enable_big_user_two_nodes_pathway", "wind_cf_avg_real"]
+  ua_big_user_2n_rndm: ["enable_big_user_two_nodes_pathway", "wind_cf_rndm"]
 
 ##
 # Overrides are the building blocks from which scenarios can be defined
@@ -24,9 +32,6 @@ overrides:
             storage_cap: 0
           electrolyser:
             flow_cap: 0
-          hydrogen_storage:
-            flow_cap: 0
-            storage_cap: 0
           demand_big_user:
             sink_use_max: 0
 
@@ -39,13 +44,30 @@ overrides:
             storage_cap: 120000 # MWh (about 4.1h at rated power)
           electrolyser:
             flow_cap: 0
-          hydrogen_storage:
-            flow_cap: 0
-            storage_cap: 0
           demand_big_user:
             sink_use_max: 0
 
   enable_hydrogen_pathway:
+    techs:
+      demand_h2_offtake:
+        cost_flow_in:
+          data: -0.002 # kEUR per MWh_h2 value proxy for delivered hydrogen
+          index: monetary
+          dims: costs
+      nld_to_h2_offtake_line:
+        base_tech: transmission
+        color: "#2A9D8F"
+        carrier_in: hydrogen
+        carrier_out: hydrogen
+        link_from: NLD
+        link_to: H2_OFFTAKE
+        one_way: true
+        flow_out_eff: 0.995
+        flow_cap: 6000 # MW_h2 transfer capacity
+        cost_flow_cap:
+          data: 0.001 # small annualized transport cost proxy (kEUR/MW)
+          index: monetary
+          dims: costs
     nodes:
       NLD:
         techs:
@@ -53,11 +75,14 @@ overrides:
             flow_cap: 0
           electrolyser:
             flow_cap: 6000 # MW
-          hydrogen_storage:
-            flow_cap: 6000 # MW
-            storage_cap: 50000000 # MWh_h2
           demand_big_user:
             sink_use_max: 0
+      H2_OFFTAKE:
+        latitude: 52.2
+        longitude: 5.3
+        techs:
+          demand_h2_offtake:
+            sink_use_max: 6000 # MW_h2 offtake ceiling
 
   enable_big_user_pathway:
     techs:
@@ -73,9 +98,6 @@ overrides:
             flow_cap: 0
           electrolyser:
             flow_cap: 0
-          hydrogen_storage:
-            flow_cap: 0
-            storage_cap: 0
           demand_big_user:
             sink_use_max: 2500 # MW flexible demand ceiling
 
@@ -107,9 +129,6 @@ overrides:
             flow_cap: 0
           electrolyser:
             flow_cap: 0
-          hydrogen_storage:
-            flow_cap: 0
-            storage_cap: 0
           demand_big_user:
             sink_use_max: 0
       BIG_USER:

@@ -1,0 +1,14 @@
+##
+# Uncertainty overrides
+##
+overrides:
+  wind_cf_avg_real:
+    data_tables:
+      renewables:
+        data: input_data_tables/cf_avg_real.csv
+
+  wind_cf_rndm:
+    data_tables:
+      renewables:
+        data: input_data_tables/cf_avg_rndm.csv
+
