@@ -8,6 +8,7 @@ scenarios:
   surplus_to_battery: ["enable_battery_pathway"]
   surplus_to_hydrogen: ["enable_hydrogen_pathway"]
   surplus_to_big_user: ["enable_big_user_pathway"]
+  surplus_to_big_user_two_nodes: ["enable_big_user_two_nodes_pathway"]
 
 ##
 # Overrides are the building blocks from which scenarios can be defined
@@ -34,8 +35,8 @@ overrides:
       NLD:
         techs:
           battery_storage:
-            flow_cap: 1200 # MW
-            storage_cap: 4920 # MWh (about 4.1h at rated power)
+            flow_cap: 30000 #1200 # MW
+            storage_cap: 120000 # MWh (about 4.1h at rated power)
           electrolyser:
             flow_cap: 0
           hydrogen_storage:
@@ -51,10 +52,10 @@ overrides:
           battery_storage:
             flow_cap: 0
           electrolyser:
-            flow_cap: 1000 # MW
+            flow_cap: 6000 # MW
           hydrogen_storage:
-            flow_cap: 500 # MW
-            storage_cap: 5000 # MWh_h2
+            flow_cap: 6000 # MW
+            storage_cap: 50000000 # MWh_h2
           demand_big_user:
             sink_use_max: 0
 
@@ -62,7 +63,7 @@ overrides:
     techs:
       demand_big_user:
         cost_flow_in:
-          data: -0.02 # kEUR per MWh revenue-equivalent for delivered power
+          data: -0.01 # kEUR per MWh revenue-equivalent for delivered power
           index: monetary
           dims: costs
     nodes:
@@ -77,3 +78,43 @@ overrides:
             storage_cap: 0
           demand_big_user:
             sink_use_max: 2500 # MW flexible demand ceiling
+
+  enable_big_user_two_nodes_pathway:
+    techs:
+      demand_big_user:
+        cost_flow_in:
+          data: -0.05 # kEUR per MWh revenue-equivalent for delivered power
+          index: monetary
+          dims: costs
+      nld_to_big_user_line:
+        base_tech: transmission
+        color: "#0023F5"
+        carrier_in: power
+        carrier_out: power
+        link_from: NLD
+        link_to: BIG_USER
+        one_way: true
+        flow_out_eff: 0.98
+        flow_cap: 6000 # MW transfer capacity
+        cost_flow_cap:
+          data: 0.001 # small annualized grid-use cost proxy (kEUR/MW)
+          index: monetary
+          dims: costs
+    nodes:
+      NLD:
+        techs:
+          battery_storage:
+            flow_cap: 0
+          electrolyser:
+            flow_cap: 0
+          hydrogen_storage:
+            flow_cap: 0
+            storage_cap: 0
+          demand_big_user:
+            sink_use_max: 0
+      BIG_USER:
+        latitude: 52.0
+        longitude: 5.5
+        techs:
+          demand_big_user:
+            sink_use_max: 4000 # MW Demand for electrolysis 

@@ -22,7 +22,7 @@ techs:
     carrier_out: power
     lifetime: 50
     cost_flow_out:
-      data: 0.25 # kEUR per MWh - about 10x more expensive than the most expensive generator
+      data: 0.25 #0.25 # kEUR per MWh - about 10x more expensive than the most expensive generator
       index: monetary
       dims: costs
 
@@ -54,16 +54,16 @@ techs:
       carrier_out: power
       cyclic_storage: false  # operate-mode requires non-cyclic storage
       storage_initial: 0 # start empty at first timestep to avoid NaN in storage balance
-      storage_cap_per_unit: 1400 #4.1 # MWh per MW of capacity (4-hour battery)
-      flow_out_eff: 0.975 # Round-trip efficiency (discharge)
-      flow_in_eff: 0.985 # (charge)
-      lifetime: 25 # Battery lifetime in years
+      storage_cap_per_unit: 5 # MWh per MW of capacity (4-hour battery)
+      flow_out_eff: 0.95 # Round-trip efficiency (discharge)
+      flow_in_eff: 0.947 # (charge)
+      lifetime: 20 # Battery lifetime in years
       cost_flow_cap:
-        data: 70  # kEUR per MW (power capacity)
+        data: 180  # kEUR per MW (power capacity)
         index: monetary
         dims: costs
       cost_storage_cap:
-        data: 60   # kEUR per MWh (energy capacity)
+        data: 100   # kEUR per MWh (energy capacity)
         index: monetary
         dims: costs
       cost_flow_in:
@@ -81,15 +81,15 @@ techs:
 
   electrolyser:
     name: "Electrolyser"
-    color: "#2BC0E4"
+    color: "#449C2A"
     base_tech: conversion
     template: interest_rate_setter
     carrier_in: power
     carrier_out: hydrogen
-    flow_out_eff: 0.70
+    flow_out_eff: 0.76
     lifetime: 20
     cost_flow_cap:
-      data: 750 # kEUR per MW
+      data: 280 # kEUR per MW (this is cost for onshore)
       index: monetary
       dims: costs
     cost_flow_in:
