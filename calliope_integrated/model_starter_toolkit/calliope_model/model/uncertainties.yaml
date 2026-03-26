@@ -12,3 +12,7 @@ overrides:
       renewables:
         data: input_data_tables/cf_avg_rndm.csv
 
+  wind_cf_avg_real_wake8:
+    data_tables:
+      renewables:
+        data: input_data_tables/cf_avg_real_wake8.csv

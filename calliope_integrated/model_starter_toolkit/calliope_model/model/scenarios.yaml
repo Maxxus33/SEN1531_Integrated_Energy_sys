@@ -17,6 +17,14 @@ scenarios:
   ua_hydrogen_rndm: ["enable_hydrogen_pathway", "wind_cf_rndm"]
   ua_big_user_2n_avg: ["enable_big_user_two_nodes_pathway", "wind_cf_avg_real"]
   ua_big_user_2n_rndm: ["enable_big_user_two_nodes_pathway", "wind_cf_rndm"]
+  uw_baseline_normal: ["neutral_baseline", "wind_cf_avg_real"]
+  uw_baseline_wake8: ["neutral_baseline", "wind_cf_avg_real_wake8"]
+  uw_battery_normal: ["enable_battery_pathway", "wind_cf_avg_real"]
+  uw_battery_wake8: ["enable_battery_pathway", "wind_cf_avg_real_wake8"]
+  uw_hydrogen_normal: ["enable_hydrogen_pathway", "wind_cf_avg_real"]
+  uw_hydrogen_wake8: ["enable_hydrogen_pathway", "wind_cf_avg_real_wake8"]
+  uw_big_user_2n_normal: ["enable_big_user_two_nodes_pathway", "wind_cf_avg_real"]
+  uw_big_user_2n_wake8: ["enable_big_user_two_nodes_pathway", "wind_cf_avg_real_wake8"]
 
 ##
 # Overrides are the building blocks from which scenarios can be defined

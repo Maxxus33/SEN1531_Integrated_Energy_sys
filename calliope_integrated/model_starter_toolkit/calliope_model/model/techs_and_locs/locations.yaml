@@ -17,6 +17,8 @@ nodes:
       demand_big_user:
       curtailment: 
       load_shedding:
+      ccgt:
+        flow_cap: 70000 # MW backup thermal capacity
 
 
       # ##

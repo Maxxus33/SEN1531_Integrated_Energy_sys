@@ -26,6 +26,18 @@ techs:
       index: monetary
       dims: costs
 
+  ccgt:
+    name: "CCGT backup plant"
+    color: "#73197A"
+    base_tech: supply
+    template: interest_rate_setter
+    carrier_out: power
+    lifetime: 30
+    cost_flow_out:
+      data: 0.09 # kEUR per MWh (all-in variable generation cost proxy: fuel + CO2 + VOM)
+      index: monetary
+      dims: costs
+
   # ##
   # # Variable renewable supply
   # ##
@@ -97,23 +109,6 @@ techs:
       index: monetary
       dims: costs
 
-  # fuel_cell:
-  #   name: "Fuel cell"
-  #   color: "#1E88E5"
-  #   base_tech: conversion
-  #   template: interest_rate_setter
-  #   carrier_in: hydrogen
-  #   carrier_out: power
-  #   flow_out_eff: 0.55
-  #   lifetime: 20
-  #   cost_flow_cap:
-  #     data: 900 # kEUR per MW
-  #     index: monetary
-  #     dims: costs
-  #   cost_flow_in:
-  #     data: 0.000001 # kEUR per MWh
-  #     index: monetary
-  #     dims: costs
 
   ##
   # Demand

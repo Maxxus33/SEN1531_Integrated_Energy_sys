@@ -1,0 +1,5 @@
+scenario,incidental_opex_kEUR,shadow_price_avg_kEUR_per_MWh,shadow_price_p50_kEUR_per_MWh,lcoe_total_kEUR_per_MWh,electricity_sold_MWh,electricity_revenue_kEUR,capex_proxy_kEUR
+default,4732912.127,0.029063356,-0.001,0.010748718,389105080,5500365.185,123838197
+surplus_to_battery,3659137.77,0.027791902,-0.001,0.008535146,546339505.9,5632636.845,141238197
+surplus_to_big_user_two_nodes,3587178.531,0.031985734,-0.001,0.008146691,389105080,6518473.781,123838209
+surplus_to_hydrogen,4650246.744,0.029286265,-0.001,0.01056098,389105080,5580512.674,125518209
