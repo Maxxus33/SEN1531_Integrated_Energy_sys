@@ -71,7 +71,7 @@ overrides:
         link_to: H2_OFFTAKE
         one_way: true
         flow_out_eff: 0.995
-        flow_cap: 6000 # MW_h2 transfer capacity
+        flow_cap: 18000 # MW_h2 transfer capacity
         cost_flow_cap:
           data: 0.001 # small annualized transport cost proxy (kEUR/MW)
           index: monetary
@@ -82,7 +82,7 @@ overrides:
           battery_storage:
             flow_cap: 0
           electrolyser:
-            flow_cap: 6000 # MW
+            flow_cap: 18000 # MW
           demand_big_user:
             sink_use_max: 0
       H2_OFFTAKE:
@@ -90,7 +90,7 @@ overrides:
         longitude: 5.3
         techs:
           demand_h2_offtake:
-            sink_use_max: 6000 # MW_h2 offtake ceiling
+            sink_use_max: 18000 # MW_h2 offtake ceiling
 
   enable_big_user_pathway:
     techs:
